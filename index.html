@@ -3,32 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lafond Empire | Streaming</title>
+    <title>LAFOND EMPIRE | Streaming</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="overlay"></div>
-
     <header>
         <div class="logo">LAFOND <span>EMPIRE</span></div>
-        <nav>
-            <input type="text" id="search" placeholder="Rechercher un contenu...">
-        </nav>
+        <div class="search-box">
+            <input type="text" id="search" placeholder="Rechercher dans l'Empire...">
+        </div>
     </header>
 
     <main class="container">
-        <section class="grid" id="mainGrid">
-            <div class="loader">Chargement de l'empire...</div>
-        </section>
+        <div class="grid" id="mainGrid">
+            </div>
     </main>
 
+    <div id="playerModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times; FERMER</span>
+            <div id="videoWrapper">
+                </div>
+            <h2 id="videoTitle">Titre de la Vidéo</h2>
+        </div>
+    </div>
+
     <footer>
-        <p>&copy; 2026 Lafond Empire. Tous droits réservés.</p>
+        &copy; 2026 LAFOND EMPIRE - Technologie Automatisée
     </footer>
 
     <script src="script.js"></script>
 </body>
 </html>
-
