@@ -1,56 +1,59 @@
 const grid = document.getElementById('mainGrid');
 const searchInput = document.getElementById('search');
+const modal = document.getElementById('playerModal');
+const videoWrapper = document.getElementById('videoWrapper');
+const videoTitle = document.getElementById('videoTitle');
+const closeBtn = document.querySelector('.close-btn');
 
-// Configuration de l'Empire
-const API_URL = 'https://api.jikan.moe/v4/top/anime?filter=bypopularity';
-
-async function initEmpire() {
+// Charger les données de l'API
+async function loadAnime() {
     try {
-        const response = await fetch(API_URL);
-        const data = await response.json();
-        render(data.data);
-    } catch (err) {
-        grid.innerHTML = `<div style="color:red; text-align:center; width:100%;">
-            Système hors ligne. Vérifiez votre connexion.
-        </div>`;
+        const res = await fetch('https://api.jikan.moe/v4/top/anime');
+        const json = await res.json();
+        display(json.data);
+    } catch (e) {
+        grid.innerHTML = "<p>Erreur de chargement...</p>";
     }
 }
 
-function render(items) {
+function display(data) {
     grid.innerHTML = "";
-    items.forEach(item => {
-        // Lien de recherche intelligent pour le visionnage
-        const searchLink = `https://vostfree.ws/?do=search&subaction=search&story=${encodeURIComponent(item.title)}`;
-        
+    data.forEach(item => {
         const card = document.createElement('div');
         card.className = 'card';
         card.innerHTML = `
-            <a href="${searchLink}" target="_blank" style="text-decoration:none; color:inherit;">
-                <img src="${item.images.jpg.large_image_url}" alt="${item.title}" loading="lazy">
-                <div class="card-info">
-                    <div class="play-icon">▶</div>
-                    <div class="card-title">${item.title}</div>
-                </div>
-            </a>
+            <img src="${item.images.jpg.large_image_url}" alt="${item.title}">
+            <div class="card-title">${item.title.substring(0, 25)}...</div>
         `;
+        
+        // Action au clic : Ouvrir le lecteur interne
+        card.onclick = () => {
+            const query = encodeURIComponent(item.title + " streaming vostfr");
+            // On utilise un moteur de recherche de flux externe pour l'iframe
+            // Ici configuré sur une recherche YouTube pour l'exemple
+            const streamUrl = `https://www.youtube.com/embed?listType=search&list=${query}`;
+            
+            videoTitle.innerText = item.title;
+            videoWrapper.innerHTML = `<iframe src="${streamUrl}" allowfullscreen></iframe>`;
+            modal.style.display = "block";
+        };
+        
         grid.appendChild(card);
     });
 }
 
-// Recherche instantanée sans recharger la page
-searchInput.addEventListener('input', (e) => {
-    const term = e.target.value.toLowerCase();
-    const cards = document.querySelectorAll('.card');
-    
-    cards.forEach(card => {
-        const title = card.innerText.toLowerCase();
-        if(title.includes(term)) {
-            card.style.display = "block";
-        } else {
-            card.style.display = "none";
-        }
-    });
-});
+// Fermeture du lecteur
+closeBtn.onclick = () => {
+    modal.style.display = "none";
+    videoWrapper.innerHTML = ""; // Stop la vidéo
+};
 
-// Lancement au démarrage
-initEmpire();
+// Recherche dynamique
+searchInput.oninput = (e) => {
+    const term = e.target.value.toLowerCase();
+    document.querySelectorAll('.card').forEach(card => {
+        card.style.display = card.innerText.toLowerCase().includes(term) ? "block" : "none";
+    });
+};
+
+loadAnime();
