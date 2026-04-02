@@ -1,104 +1,133 @@
 :root {
     --primary: #ff0000;
-    --primary-glow: rgba(255, 0, 0, 0.5);
+    --primary-dim: #800000;
     --bg: #050505;
-    --glass: rgba(255, 255, 255, 0.05);
+    --card-bg: rgba(20, 20, 20, 0.8);
+    --neon-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
 }
+
+* { box-sizing: border-box; }
 
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
     background-color: var(--bg);
-    color: white;
-    overflow-x: hidden;
+    color: #eee;
+    background-image: radial-gradient(circle at top, #1a0000 0%, #050505 100%);
+    background-attachment: fixed;
 }
 
-/* Background stylé */
-.overlay {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle at 50% 50%, #1a0000 0%, #050505 100%);
-    z-index: -1;
-}
-
+/* Header Style Empire */
 header {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: var(--glass);
+    text-align: center;
+    padding: 30px 10px;
+    border-bottom: 2px solid var(--primary);
+    box-shadow: var(--neon-shadow);
+    background: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--primary);
-    sticky: top;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .logo {
     font-family: 'Orbitron', sans-serif;
     font-size: 1.8rem;
-    letter-spacing: 4px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    text-transform: uppercase;
     margin-bottom: 15px;
 }
 
 .logo span { color: var(--primary); text-shadow: 0 0 10px var(--primary); }
 
+/* Barre de recherche futuriste */
+.search-box {
+    width: 90%;
+    max-width: 400px;
+    margin: 0 auto;
+    position: relative;
+}
+
 #search {
-    background: rgba(255,255,255,0.1);
+    width: 100%;
+    padding: 12px 20px;
+    background: #111;
     border: 1px solid #333;
-    padding: 10px 20px;
-    border-radius: 30px;
+    border-radius: 5px;
     color: white;
-    width: 280px;
+    font-family: 'Poppins', sans-serif;
     transition: 0.3s;
 }
 
 #search:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 15px var(--primary-glow);
     outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 10px var(--primary-dim);
 }
 
+/* Grille de contenu */
 .container { padding: 20px; }
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 20px;
 }
 
-/* Cartes de contenu */
+/* Cartes Premium */
 .card {
-    background: var(--glass);
-    border-radius: 15px;
+    background: var(--card-bg);
+    border-radius: 8px;
     overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.1);
-    transition: all 0.4s ease;
+    border: 1px solid #222;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
 }
 
 .card:hover {
-    transform: translateY(-10px) scale(1.02);
+    transform: scale(1.05);
     border-color: var(--primary);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    box-shadow: var(--neon-shadow);
 }
 
 .card img {
     width: 100%;
-    height: 240px;
+    height: 220px;
     object-fit: cover;
+    filter: grayscale(30%);
+    transition: 0.3s;
+}
+
+.card:hover img { filter: grayscale(0%); }
+
+.card-info {
+    padding: 10px;
+    background: linear-gradient(to top, #000, transparent);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.play-icon {
+    font-size: 1.2rem;
+    color: var(--primary);
+    margin-bottom: 5px;
 }
 
 .card-title {
-    padding: 12px;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 500;
-    text-align: center;
-    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 footer {
     text-align: center;
-    padding: 40px;
-    opacity: 0.5;
-    font-size: 0.8rem;
+    padding: 30px;
+    font-size: 0.7rem;
+    color: #444;
+    border-top: 1px solid #111;
 }
-
