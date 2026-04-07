@@ -3,37 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LAFOND EMPIRE | Streaming</title>
+    <title>Psyx-Manga | Lire n'est que beauté 🔴⚫</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <header>
-        <div class="logo">LAFOND <span>EMPIRE</span></div>
-        <div class="search-box">
-            <input type="text" id="search" placeholder="Rechercher dans l'Empire...">
+    <nav class="ortega-nav">
+        <div class="logo">PSYX<span>MANGA</span></div>
+        <div class="menu">
+            <a href="#">ACCUEIL</a>
+            <a href="#">MANGAS</a>
+            <a href="#">GENRES</a>
+            <a href="#"><i class="fas fa-search"></i></a>
         </div>
-    </header>
+    </nav>
 
-    <main class="container">
-        <div class="grid" id="mainGrid">
-            </div>
-    </main>
-
-    <div id="playerModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn">&times; FERMER</span>
-            <div id="videoWrapper">
+    <div class="container">
+        <h2 class="section-title"><i class="fas fa-fire"></i> DERNIÈRES SORTIES</h2>
+        
+        <div class="manga-grid">
+            <div class="manga-card">
+                <div class="manga-poster">
+                    <img src="1000031595.jpg" alt="Jojo">
+                    <div class="manga-status">HYPE</div>
                 </div>
-            <h2 id="videoTitle">Titre de la Vidéo</h2>
+                <div class="manga-info">
+                    <h3>JOJO'S ADVENTURE</h3>
+                    <div class="chapters">
+                        <a href="#" class="chap">Chap. 102 <span>Il y a 2h</span></a>
+                        <a href="#" class="chap">Chap. 101 <span>Hier</span></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="manga-card">
+                <div class="manga-poster">
+                    <img src="1000031594.jpg" alt="Bleach">
+                </div>
+                <div class="manga-info">
+                    <h3>BLEACH GOTEI 13</h3>
+                    <div class="chapters">
+                        <a href="#" class="chap">Chap. 686 <span>Nouveau</span></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="manga-card">
+                <div class="manga-poster">
+                    <img src="1000031593.jpg" alt="HxH">
+                </div>
+                <div class="manga-info">
+                    <h3>HUNTER X HUNTER</h3>
+                    <div class="chapters">
+                        <a href="#" class="chap">Chap. 401 <span>En attente</span></a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <footer>
-        &copy; 2026 LAFOND EMPIRE - Technologie Automatisée
-    </footer>
-
-    <script src="script.js"></script>
 </body>
 </html>
