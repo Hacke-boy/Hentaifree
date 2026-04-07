@@ -1,92 +1,92 @@
-const grid = document.getElementById('mainGrid');
-const searchInput = document.getElementById('search');
-const modal = document.getElementById('playerModal');
-const videoWrapper = document.getElementById('videoWrapper');
-const videoTitle = document.getElementById('videoTitle');
-const closeBtn = document.querySelector('.close-btn');
+/**
+ * PSYX-MANGA - Script Officiel
+ * Style: OrtegaScans (Clean & Fast)
+ */
 
-// --- SYSTÈME D'HISTORIQUE ---
-let history = JSON.parse(localStorage.getItem('lafond_history')) || [];
+// 1. GESTION DU LOADER (Écran de chargement)
+window.addEventListener('load', () => {
+    const loader = document.getElementById('loader');
+    if (loader) {
+        setTimeout(() => {
+            loader.style.opacity = '0';
+            loader.style.visibility = 'hidden';
+            // On réactive le scroll une fois chargé
+            document.body.classList.remove('loading-active');
+        }, 1500); // 1.5 seconde pour le style "Premium"
+    }
+});
 
-function saveToHistory(item) {
-    // Évite les doublons
-    history = history.filter(h => h.id !== item.mal_id);
-    history.unshift({
-        id: item.mal_id,
-        title: item.title,
-        img: item.images.jpg.small_image_url,
-        date: new Date().toLocaleDateString()
+// 2. GESTION DES CHAPITRES (Simulation Ortega)
+// Ajoute un effet au clic sur les chapitres
+document.querySelectorAll('.chap').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        // e.preventDefault(); // Décommenter si tu ne veux pas que le lien change de page
+        console.log("Lecture du chapitre lancée...");
+        // Ici, tu pourrais ouvrir une modale de lecture ou une nouvelle page
     });
-    // On garde seulement les 10 derniers
-    if (history.length > 10) history.pop();
-    localStorage.setItem('lafond_history', JSON.stringify(history));
+});
+
+// 3. LOGIQUE DU PANIER (Si achat de tomes physiques)
+let cart = [];
+
+function addToCart(mangaName, price) {
+    const item = {
+        name: mangaName,
+        price: price,
+        date: new Date().toLocaleDateString()
+    };
+    
+    cart.push(item);
+    updateCartIcon();
+    
+    // Notification rapide
+    alert(`${mangaName} ajouté à votre sélection !`);
 }
 
-// --- CHARGEMENT DU CATALOGUE ---
-async function loadAnime() {
-    try {
-        const res = await fetch('https://api.jikan.moe/v4/top/anime?limit=20');
-        const json = await res.json();
-        display(json.data);
-    } catch (e) {
-        grid.innerHTML = "<p>Erreur de connexion...</p>";
+function updateCartIcon() {
+    const cartCount = document.getElementById('cart-count');
+    if (cartCount) {
+        cartCount.innerText = cart.length;
+        // Petit effet d'animation sur l'icône
+        cartCount.style.transform = 'scale(1.2)';
+        setTimeout(() => cartCount.style.transform = 'scale(1)', 200);
     }
 }
 
-function display(data) {
-    grid.innerHTML = "";
-    data.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `
-            <img src="${item.images.jpg.large_image_url}" alt="${item.title}" loading="lazy">
-            <div class="card-info">
-                <div class="card-title">${item.title.substring(0, 25)}...</div>
-            </div>
-        `;
-        
-        card.onclick = () => {
-            saveToHistory(item);
-            openPlayer(item.title);
-        };
-        grid.appendChild(card);
+// 4. FORMULAIRE DE COMMANDE WHATSAPP (Style Ortega)
+function sendOrderWhatsApp() {
+    const name = document.getElementById('form-name')?.value;
+    const phone = document.getElementById('form-phone')?.value;
+    const address = document.getElementById('form-address')?.value;
+    const payMethod = document.getElementById('form-pay')?.value;
+
+    if (!name || !phone || !address) {
+        alert("Veuillez remplir tous les champs de l'Empire !");
+        return;
+    }
+
+    let message = `*COMMANDE PSYX-MANGA*%0A`;
+    message += `--------------------------%0A`;
+    message += `*Client:* ${name}%0A`;
+    message += `*WhatsApp:* ${phone}%0A`;
+    message += `*Lieu:* ${address}%0A`;
+    message += `*Paiement:* ${payMethod}%0A`;
+    message += `--------------------------%0A`;
+    message += `*Sélection:*%0A`;
+    
+    cart.forEach(item => {
+        message += `- ${item.name} (${item.price} HTG)%0A`;
     });
+
+    const finalUrl = `https://wa.me/50935144295?text=${message}`;
+    window.open(finalUrl, '_blank');
 }
 
-// --- MOTEUR DE LECTURE (VOSTFR / VF) ---
-function openPlayer(title) {
-    videoTitle.innerText = title;
-    
-    // On cible des sources comme VostFree via une recherche de flux intégrable
-    // Note : Google/YouTube bloquent moins les "Trailers" ou "Previews"
-    const searchQuery = encodeURIComponent(title + " streaming vostfr vf");
-    const streamUrl = `https://www.youtube.com/embed?listType=search&list=${searchQuery}&autoplay=1`;
-
-    videoWrapper.innerHTML = `
-        <iframe 
-            src="${streamUrl}" 
-            allow="autoplay; fullscreen" 
-            allowfullscreen>
-        </iframe>`;
-    
-    modal.style.display = "block";
-}
-
-closeBtn.onclick = () => {
-    modal.style.display = "none";
-    videoWrapper.innerHTML = ""; 
-    // Ici, le navigateur mémorise naturellement la position si c'est un flux compatible
-};
-
-// Fermer au clic extérieur
-window.onclick = (e) => { if (e.target == modal) closeBtn.onclick(); };
-
-// Recherche
-searchInput.oninput = (e) => {
-    const term = e.target.value.toLowerCase();
-    document.querySelectorAll('.card').forEach(card => {
-        card.style.display = card.innerText.toLowerCase().includes(term) ? "block" : "none";
+// 5. RECHERCHE (Optionnel - Pour le look Ortega)
+const searchIcon = document.querySelector('.fa-search');
+if (searchIcon) {
+    searchIcon.parentElement.addEventListener('click', () => {
+        const query = prompt("Quel manga cherchez-vous dans l'Empire ?");
+        if (query) alert("Recherche en cours pour : " + query);
     });
-};
-
-loadAnime();
+            }
