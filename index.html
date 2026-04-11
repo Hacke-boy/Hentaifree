@@ -3,65 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Psyx-Manga | Lire n'est que beauté 🔴⚫</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>PSYX-MANGA | Boutique & Scans Haïti</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,700;1,600&family=Barlow:wght@300;400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <nav class="ortega-nav">
-        <div class="logo">PSYX<span>MANGA</span></div>
-        <div class="menu">
-            <a href="#">ACCUEIL</a>
-            <a href="#">MANGAS</a>
-            <a href="#">GENRES</a>
-            <a href="#"><i class="fas fa-search"></i></a>
+    <nav id="nav">
+        <div class="nav-logo">PSYX<span>MANGA</span></div>
+        <div class="nav-mid">
+            <input type="text" id="searchInput" placeholder="Rechercher un manga...">
+        </div>
+        <div class="nav-right">
+            <div id="authSection">
+                <button class="btn-sec" onclick="openAuthModal()">Connexion</button>
+            </div>
+            <button class="btn-cart">🛒 <span class="badge" id="cartCount">0</span></button>
         </div>
     </nav>
 
-    <div class="container">
-        <h2 class="section-title"><i class="fas fa-fire"></i> DERNIÈRES SORTIES</h2>
-        
-        <div class="manga-grid">
-            <div class="manga-card">
-                <div class="manga-poster">
-                    <img src="1000031595.jpg" alt="Jojo">
-                    <div class="manga-status">HYPE</div>
-                </div>
-                <div class="manga-info">
-                    <h3>JOJO'S ADVENTURE</h3>
-                    <div class="chapters">
-                        <a href="#" class="chap">Chap. 102 <span>Il y a 2h</span></a>
-                        <a href="#" class="chap">Chap. 101 <span>Hier</span></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="manga-card">
-                <div class="manga-poster">
-                    <img src="1000031594.jpg" alt="Bleach">
-                </div>
-                <div class="manga-info">
-                    <h3>BLEACH GOTEI 13</h3>
-                    <div class="chapters">
-                        <a href="#" class="chap">Chap. 686 <span>Nouveau</span></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="manga-card">
-                <div class="manga-poster">
-                    <img src="1000031593.jpg" alt="HxH">
-                </div>
-                <div class="manga-info">
-                    <h3>HUNTER X HUNTER</h3>
-                    <div class="chapters">
-                        <a href="#" class="chap">Chap. 401 <span>En attente</span></a>
-                    </div>
-                </div>
+    <section id="hero">
+        <div class="hero-glow"></div>
+        <div class="hero-content">
+            <span class="hero-badge">DISPONIBLE EN HAÏTI</span>
+            <h1>LECTURE <span>ILLIMITÉE</span></h1>
+            <p class="slogan">Mangas, Figurines & Posters au meilleur prix.</p>
+            <div class="hero-btns">
+                <button class="btn-primary" onclick="scrollToShop()">VOIR LA BOUTIQUE</button>
+                <button class="btn-sec">LIRE LES SCANS</button>
             </div>
         </div>
-    </div>
+        <div class="hero-deco">MANGA</div>
+    </section>
 
+    <section class="section">
+        <h2 class="sec-title">DERNIÈRES <span>SORTIES</span></h2>
+        <div id="mangaGrid" class="grid">
+            <p class="empty">Chargement des mangas...</p>
+        </div>
+    </section>
+
+    <script type="module" src="app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
+    </script>
 </body>
 </html>
