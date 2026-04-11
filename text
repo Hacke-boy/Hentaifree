@@ -1,0 +1,8 @@
+/
+├── index.html       (La structure principale)
+├── style.css       (Ton design que tu as fourni)
+├── app.js          (La logique : API Manga + Firebase)
+├── auth.js         (Gestion des comptes utilisateurs)
+├── manifest.json   (Pour l'installation sur mobile - PWA)
+└── sw.js           (Mode hors-ligne pour Haïti)
+
