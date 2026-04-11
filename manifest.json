@@ -1,0 +1,16 @@
+{
+  "name": "Psyx Manga Haïti",
+  "short_name": "PsyxManga",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#070707",
+  "theme_color": "#dc1c1c",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/2281/2281832.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
+
