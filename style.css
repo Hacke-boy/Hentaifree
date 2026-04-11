@@ -1,0 +1,85 @@
+/* PSYX-MANGA | style.css */
+:root {
+  --bg: #070707; --dark: #0e0e0e; --card: #141414; --card2: #1c1c1c;
+  --bdr: #222; --red: #dc1c1c; --red2: #ff2e2e;
+  --white: #f0f0f0; --muted: #666; --muted2: #2a2a2a;
+  --D: 'Bebas Neue', sans-serif; --B: 'Barlow', sans-serif; --C: 'Barlow Condensed', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--white); font-family: var(--B); overflow-x: hidden; }
+
+/* ── NAVIGATION ── */
+#nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 5%; background: rgba(7, 7, 7, 0.95);
+    border-bottom: 1px solid var(--bdr); position: sticky; top: 0; z-index: 100;
+}
+.nav-logo { font-family: var(--D); font-size: 2rem; letter-spacing: 2px; }
+.nav-logo span { color: var(--red); }
+.nav-mid input {
+    background: var(--card); border: 1px solid var(--bdr); padding: 0.6rem 1rem;
+    color: white; border-radius: 4px; width: 300px; outline: none;
+}
+.badge { background: var(--red); font-size: 0.7rem; padding: 2px 6px; border-radius: 10px; position: relative; top: -10px; }
+
+/* ── HERO ── */
+#hero {
+    height: 60vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; background: linear-gradient(to bottom, rgba(0,0,0,0.5), var(--bg)), url('https://images.alphacoders.com/605/605592.jpg');
+    background-size: cover; background-position: center;
+}
+#hero h1 { font-family: var(--D); font-size: 5rem; line-height: 1; }
+#hero h1 span { color: var(--red); }
+
+/* ── GRID DYNAMIQUE ── */
+.section { padding: 4rem 5%; }
+.sec-title { font-family: var(--D); font-size: 2.5rem; margin-bottom: 2rem; }
+.grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+/* ── CARDS ── */
+.card {
+    background: var(--card); border: 1px solid var(--bdr); border-radius: 8px;
+    overflow: hidden; transition: 0.3s; position: relative;
+}
+.card:hover { transform: translateY(-5px); border-color: var(--red); }
+.card-img { width: 100%; height: 280px; object-fit: cover; }
+.card-hover {
+    position: absolute; inset: 0; background: rgba(0,0,0,0.8);
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    opacity: 0; transition: 0.3s;
+}
+.card:hover .card-hover { opacity: 1; }
+.card-btn {
+    width: 80%; padding: 0.8rem; margin: 5px; border: none; font-family: var(--D);
+    font-size: 1rem; cursor: pointer; border-radius: 4px;
+}
+.card-btn.buy { background: var(--red); color: white; }
+.card-btn.read { background: white; color: black; }
+
+.card-body { padding: 1rem; }
+.card-name { font-family: var(--C); font-weight: bold; font-size: 1.1rem; margin-bottom: 5px; }
+.card-meta { font-size: 0.8rem; color: var(--muted); }
+
+/* ── TOAST (NOTIFICATIONS) ── */
+.toast {
+    position: fixed; bottom: 2rem; right: 2rem;
+    background: #22c55e; color: white; padding: 1rem 2rem;
+    border-radius: 4px; font-family: var(--C); font-weight: bold;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5); z-index: 10000;
+    animation: slideIn 0.3s ease-out;
+}
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+    .nav-mid input { width: 150px; }
+    #hero h1 { font-size: 3rem; }
+}
+
